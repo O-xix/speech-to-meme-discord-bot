@@ -1,0 +1,25 @@
+{
+  "name": "speech-to-meme-discord-bot",
+  "version": "1.0.0",
+  "description": "CSS 370 (Sprint 2025) Project: Speech-to-Meme Discord Bot",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc && NODE_ENV=development node ./dist/index.js",
+    "lint": "eslint --fix ./src/ && prettier --write ./src/",
+    "lint-check": "eslint ./src/ && prettier --check ./src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-xix/speech-to-meme-discord-bot.git"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
+    "@types/node": "^22.15.29",
+    "eslint": "^9.28.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.4.1",
+    "prettier": "^3.5.3",
+    "typescript": "^5.8.3"
+  }
+}
