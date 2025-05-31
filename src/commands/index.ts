@@ -1,2 +1,2 @@
 // Import all commands.
-import "./ping";
+import "./join";

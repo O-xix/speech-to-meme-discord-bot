@@ -12,7 +12,9 @@ async function main() {
     // Register commands with Discord.
     await publishCommands(process.env.BOT_CLIENT_ID!, process.env.BOT_TOKEN!);
 
-    const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+    const client = new Client({
+        intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
+    });
 
     client.on(Events.InteractionCreate, async (interaction) => {
         if (!interaction.isChatInputCommand()) return;
