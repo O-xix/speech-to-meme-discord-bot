@@ -6,8 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsc && NODE_ENV=development node ./dist/index.js",
-    "lint": "eslint --fix ./src/ && prettier --write ./src/",
-    "lint-check": "eslint ./src/ && prettier --check ./src/"
+    "lint": "eslint --fix ./src && prettier --write src/",
+    "lint-check": "eslint ./src && prettier --check src/"
   },
   "repository": {
     "type": "git",
@@ -15,11 +15,13 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.1",
+    "@eslint/js": "^9.28.0",
     "@types/node": "^22.15.29",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.4.1",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.33.0"
   }
 }
