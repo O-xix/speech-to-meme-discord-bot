@@ -11,10 +11,7 @@
         "isolatedModules": true,
         "incremental": true,
         "outDir": "dist",
-        "sourceMap": true,
-        "paths": {
-            "@/*": ["./*"]
-        }
+        "sourceMap": true
     },
     "include": ["src/**/*.ts"],
     "exclude": ["node_modules"]
