@@ -1,45 +1,50 @@
 import "dotenv/config";
 import { Client, Events, GatewayIntentBits, MessageFlags } from "discord.js";
 import { commands, publishCommands } from "./commandStore";
+import { setupDatabase } from "./database";
 
 // Add commands.
 import "./commands";
 
-// Register commands with Discord.
-publishCommands(process.env.BOT_CLIENT_ID!, process.env.BOT_TOKEN!).catch(
-    console.error,
-);
+async function main() {
+    await setupDatabase();
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+    // Register commands with Discord.
+    await publishCommands(process.env.BOT_CLIENT_ID!, process.env.BOT_TOKEN!);
 
-client.on(Events.InteractionCreate, async (interaction) => {
-    if (!interaction.isChatInputCommand()) return;
+    const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-    const command = commands[interaction.commandName];
+    client.on(Events.InteractionCreate, async (interaction) => {
+        if (!interaction.isChatInputCommand()) return;
 
-    if (!command) {
-        console.error(
-            `No command matching ${interaction.commandName} was found.`,
-        );
-        return;
-    }
+        const command = commands[interaction.commandName];
 
-    try {
-        await command.execute(interaction);
-    } catch (error) {
-        console.error(error);
-        if (interaction.replied || interaction.deferred) {
-            await interaction.followUp({
-                content: "There was an error while executing this command!",
-                flags: MessageFlags.Ephemeral,
-            });
-        } else {
-            await interaction.reply({
-                content: "There was an error while executing this command!",
-                flags: MessageFlags.Ephemeral,
-            });
+        if (!command) {
+            console.error(
+                `No command matching ${interaction.commandName} was found.`,
+            );
+            return;
         }
-    }
-});
 
-client.login(process.env.BOT_TOKEN);
+        try {
+            await command.execute(interaction);
+        } catch (error) {
+            console.error(error);
+            if (interaction.replied || interaction.deferred) {
+                await interaction.followUp({
+                    content: "There was an error while executing this command!",
+                    flags: MessageFlags.Ephemeral,
+                });
+            } else {
+                await interaction.reply({
+                    content: "There was an error while executing this command!",
+                    flags: MessageFlags.Ephemeral,
+                });
+            }
+        }
+    });
+
+    await client.login(process.env.BOT_TOKEN);
+}
+
+main();

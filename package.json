@@ -30,6 +30,8 @@
     "dotenv": "^16.5.0",
     "erlpack": "github:discordapp/erlpack",
     "libsodium-wrappers": "^0.7.15",
+    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
     "utf-8-validate": "^6.0.5",
     "vosk-koffi": "^1.1.1",
     "zlib-sync": "^0.1.10"
