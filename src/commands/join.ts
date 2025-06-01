@@ -107,6 +107,16 @@ function handleAudioStream(
         if (recognizer.acceptWaveform(data)) {
             // @ts-expect-error The types for the library are wrong.
             curResult.push(...recognizer.result()["text"].split(" "));
+
+            // Return so that we don't restart
+            // handleEndTimeoutID, since this is packet was
+            // silent.
+            // This has the potential to prevent the final
+            // handling code from running, but that's only if
+            // the only audio packet sent was silence,
+            // which means we didn't receive a command anyway,
+            // so it won't cause issues.
+            return;
         }
 
         if (handleEndTimeoutID != null) clearTimeout(handleEndTimeoutID);
