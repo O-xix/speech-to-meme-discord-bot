@@ -2,7 +2,7 @@ import {
     ChatInputCommandInteraction,
     REST,
     Routes,
-    SlashCommandBuilder,
+    SharedSlashCommand,
 } from "discord.js";
 
 /**
@@ -12,7 +12,7 @@ import {
 export const commands: Record<
     string,
     {
-        data: SlashCommandBuilder;
+        data: SharedSlashCommand;
         execute: (interaction: ChatInputCommandInteraction) => Promise<void>;
     }
 > = {};
@@ -26,7 +26,7 @@ export const commands: Record<
  */
 export function registerCommand(
     name: string,
-    data: SlashCommandBuilder,
+    data: SharedSlashCommand,
     execute: (interaction: ChatInputCommandInteraction) => Promise<void>,
 ) {
     if (name !== data.name) {

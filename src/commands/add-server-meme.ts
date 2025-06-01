@@ -1,21 +1,23 @@
 import { SlashCommandBuilder } from "discord.js";
 import { registerCommand } from "../commandStore";
-import { createMeme } from "../database/meme"; // Import the function
+import { createMeme } from "../database/meme";
 
 registerCommand(
     "add-server-meme",
     new SlashCommandBuilder()
         .setName("add-server-meme")
         .setDescription("Add a meme to the server's list of memes.")
-        .addStringOption(option =>
-            option.setName("name")
+        .addStringOption((option) =>
+            option
+                .setName("name")
                 .setDescription("The name of the meme")
-                .setRequired(true)
+                .setRequired(true),
         )
-        .addStringOption(option =>
-            option.setName("url")
+        .addStringOption((option) =>
+            option
+                .setName("url")
                 .setDescription("The URL of the meme image")
-                .setRequired(true)
+                .setRequired(true),
         ),
     async (interaction) => {
         if (!interaction.guild) {
@@ -32,9 +34,11 @@ registerCommand(
 
         try {
             await createMeme(guildID, authorID, name, url);
-            await interaction.reply(`Added meme: "${name}" to the server's list.`);
+            await interaction.reply(
+                `Added meme: "${name}" to the server's list.`,
+            );
         } catch (err) {
             await interaction.reply(`Failed to add meme: ${err}`);
         }
-    }, 
-)
+    },
+);

@@ -1,6 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import { registerCommand } from "../commandStore";
-import { getMemes } from "../database/meme"; // Import the function
+import { getMemes } from "../database/meme";
 
 registerCommand(
     "list-server-memes",
@@ -25,5 +25,5 @@ registerCommand(
             .map((meme, index) => `${index + 1}. ${meme.name} - ${meme.url}`)
             .join("\n");
         await interaction.reply(`Server Memes:\n${memeList}`);
-    }
+    },
 );

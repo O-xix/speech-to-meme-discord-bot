@@ -7,10 +7,11 @@ registerCommand(
     new SlashCommandBuilder()
         .setName("remove-server-meme")
         .setDescription("Remove a meme from the server's list of memes.")
-        .addStringOption(option =>
-            option.setName("meme")
+        .addStringOption((option) =>
+            option
+                .setName("meme")
                 .setDescription("The meme to remove")
-                .setRequired(true)
+                .setRequired(true),
         ),
     async (interaction) => {
         if (!interaction.guild) {
@@ -25,14 +26,18 @@ registerCommand(
 
         // Optional: Check if meme exists before removing
         const memes = await getMemes(guildID);
-        const memeExists = memes.some(m => m.name === memeName);
+        const memeExists = memes.some((m) => m.name === memeName);
 
         if (!memeExists) {
-            await interaction.reply(`The meme "${memeName}" is not in the server's list.`);
+            await interaction.reply(
+                `The meme "${memeName}" is not in the server's list.`,
+            );
             return;
         }
 
         await removeMeme(guildID, memeName);
-        await interaction.reply(`Removed meme: "${memeName}" from the server's list.`);
-    }
-)
+        await interaction.reply(
+            `Removed meme: "${memeName}" from the server's list.`,
+        );
+    },
+);
