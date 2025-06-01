@@ -65,3 +65,16 @@ export async function getMemes(guildID: string): Promise<Meme[]> {
         url: row["url"] as string,
     }));
 }
+
+/**
+ * Removes a meme from the database by guild ID and meme name.
+ * @param guildID - The ID of the guild to delete from.
+ * @param name - The name of the meme to remove.
+ */
+export async function removeMeme(guildID: string, name: string): Promise<void> {
+    await db.run(
+        "DELETE FROM memes WHERE guildID = ? AND name = ?",
+        guildID,
+        name,
+    );
+}
