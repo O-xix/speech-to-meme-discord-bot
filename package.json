@@ -31,6 +31,7 @@
     "discord.js": "^14.19.3",
     "dotenv": "^16.5.0",
     "erlpack": "github:discordapp/erlpack",
+    "fuse.js": "^7.1.0",
     "libsodium-wrappers": "^0.7.15",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7",
