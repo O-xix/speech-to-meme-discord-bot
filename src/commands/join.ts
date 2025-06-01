@@ -1,8 +1,4 @@
-import {
-    AttachmentBuilder,
-    ChatInputCommandInteraction,
-    SlashCommandBuilder,
-} from "discord.js";
+import { ChatInputCommandInteraction, SlashCommandBuilder } from "discord.js";
 import { registerCommand } from "../commandStore";
 import {
     AudioReceiveStream,
