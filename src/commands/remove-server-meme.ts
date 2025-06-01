@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import { registerCommand } from "../commandStore";
+import { removeMeme, getMemes } from "../database/meme";
 
 registerCommand(
     "remove-server-meme",
@@ -19,17 +20,19 @@ registerCommand(
             return;
         }
 
-        const meme = interaction.options.getString("meme", true);
-        const serverMemes = interaction.client.serverMemes.get(interaction.guild.id) || [];
+        const memeName = interaction.options.getString("meme", true);
+        const guildID = interaction.guild.id;
 
-        if (!serverMemes.includes(meme)) {
-            await interaction.reply(`The meme "${meme}" is not in the server's list.`);
+        // Optional: Check if meme exists before removing
+        const memes = await getMemes(guildID);
+        const memeExists = memes.some(m => m.name === memeName);
+
+        if (!memeExists) {
+            await interaction.reply(`The meme "${memeName}" is not in the server's list.`);
             return;
         }
 
-        const updatedMemes = serverMemes.filter(m => m !== meme);
-        interaction.client.serverMemes.set(interaction.guild.id, updatedMemes);
-
-        await interaction.reply(`Removed meme: "${meme}" from the server's list.`);
+        await removeMeme(guildID, memeName);
+        await interaction.reply(`Removed meme: "${memeName}" from the server's list.`);
     }
 )

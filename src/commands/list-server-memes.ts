@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import { registerCommand } from "../commandStore";
+import { getMemes } from "../database/meme"; // Import the function
 
 registerCommand(
     "list-server-memes",
@@ -14,13 +15,15 @@ registerCommand(
             return;
         }
 
-        const serverMemes = interaction.client.serverMemes.get(interaction.guild.id);
-        if (!serverMemes || serverMemes.length === 0) {
+        const memes = await getMemes(interaction.guild.id);
+        if (!memes || memes.length === 0) {
             await interaction.reply("No server memes found.");
             return;
         }
 
-        const memeList = serverMemes.map((meme, index) => `${index + 1}. ${meme}`).join("\n");
+        const memeList = memes
+            .map((meme, index) => `${index + 1}. ${meme.name} - ${meme.url}`)
+            .join("\n");
         await interaction.reply(`Server Memes:\n${memeList}`);
     }
 );
