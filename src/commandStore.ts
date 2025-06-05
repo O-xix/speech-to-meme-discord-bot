@@ -57,11 +57,7 @@ export async function publishCommands(clientID: string, token: string) {
 
     const rest = new REST().setToken(token);
 
-    await rest.put(
-        // TODO: Replace with Routes.applicationCommands
-        Routes.applicationGuildCommands(clientID, "1356749588912017564"),
-        {
-            body: commandData,
-        },
-    );
+    await rest.put(Routes.applicationCommands(clientID), {
+        body: commandData,
+    });
 }
