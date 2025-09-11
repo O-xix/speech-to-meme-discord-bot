@@ -1,0 +1,17 @@
+{
+  "title": "Speech-to-Meme",
+  "subtitle": "Discord bot with voice-activated meme posting",
+  "description": "A class project prototype of a Discord bot that lets users post memes in text channels using voice commands in a voice channel. Built with TypeScript, Discord.js, Vosk for speech-to-text, Fuse.js for fuzzy searching, and SQLite for meme storage.",
+  "technologies": [
+    "TypeScript",
+    "Discord.js",
+    "Vosk",
+    "Fuse.js",
+    "SQLite"
+  ],
+  "links": {
+    "github": "https://github.com/O-xix/speech-to-meme-discord-bot",
+    "demo": ""
+  },
+  "thumbnail": "speech-to-meme.png"
+}
